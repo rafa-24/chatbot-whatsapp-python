@@ -8,6 +8,7 @@ def webhook_whatsapp():
     if request.method == "GET":
         #SI EL TOKEN ES IGUAL AL QUE RECIBIMOS
         if request.args.get('hub.verify_token') == "chatbotpython":
+            print("Token de verificación correcto.")
             #ESCRIBIMOS EN EL NAVEGADOR EL VALOR DEL RETO RECIBIDO DESDE FACEBOOK
             return request.args.get('hub.challenge')
         else:
@@ -25,6 +26,12 @@ def webhook_whatsapp():
     timestamp=data['entry'][0]['changes'][0]['value']['messages'][0]['timestamp']
     #ESCRIBIMOS EL NUMERO DE TELEFONO Y EL MENSAJE EN EL ARCHIVO TEXTO
     #SI HAY UN MENSAJE
+    print(f"Mensaje recibido de {telefonoCliente}: {mensaje}")
+
+    # conteido del mensaje
+    print('data', data)
+
+    # Archivo en json
     if mensaje is not None:
       f = open("texto.txt", "w")
       f.write(mensaje)
